@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void SetRandomColor ()
+	private void SetRandomColor ()
 	{
 		int index = Random.Range(0, 4);
 
