@@ -3,17 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-	public float jumpForce = 10f;
+	[SerializeField] private float f_JumpForce = 10f;
 
-	public Rigidbody2D rb;
-	public SpriteRenderer sr;
+    [SerializeField] private Rigidbody2D m_Rigidbody2D;
+    [SerializeField] private SpriteRenderer m_SpriteRenderer;
 
-	public string currentColor;
+    [SerializeField] private string currentColor;
 
-	public Color colorCyan;
-	public Color colorYellow;
-	public Color colorMagenta;
-	public Color colorPink;
+	[Header("==== Colours ====")]
+    [SerializeField] private Color colorCyan;
+    [SerializeField] private Color colorYellow;
+    [SerializeField] private Color colorMagenta;
+    [SerializeField] private Color colorPink;
 
 	void Start ()
 	{
@@ -21,10 +22,11 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
 		{
-			rb.velocity = Vector2.up * jumpForce;
+			m_Rigidbody2D.velocity = Vector2.up * f_JumpForce;
 		}
 	}
 
@@ -52,19 +54,19 @@ public class Player : MonoBehaviour {
 		{
 			case 0:
 				currentColor = "Cyan";
-				sr.color = colorCyan;
+				m_SpriteRenderer.color = colorCyan;
 				break;
 			case 1:
 				currentColor = "Yellow";
-				sr.color = colorYellow;
+				m_SpriteRenderer.color = colorYellow;
 				break;
 			case 2:
 				currentColor = "Magenta";
-				sr.color = colorMagenta;
+				m_SpriteRenderer.color = colorMagenta;
 				break;
 			case 3:
 				currentColor = "Pink";
-				sr.color = colorPink;
+				m_SpriteRenderer.color = colorPink;
 				break;
 		}
 	}
