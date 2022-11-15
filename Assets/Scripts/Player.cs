@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,23 +29,34 @@ public class Player : MonoBehaviour {
 		{
 			m_Rigidbody2D.velocity = Vector2.up * f_JumpForce;
 		}
-	}
+		
 
-	void OnTriggerEnter2D (Collider2D col)
+    }
+
+	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (col.tag == "ColorChanger")
+		if (other.CompareTag("ColorChanger"))
 		{
 			SetRandomColor();
-			Destroy(col.gameObject);
+			Destroy(other.gameObject);
 			return;
 		}
 
-		if (col.tag != currentColor)
+		if (other.tag != currentColor)
 		{
+			Time.timeScale = 0;
 			Debug.Log("GAME OVER!");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			GameManager.instance.GameOver();
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
-	}
+        if (other.CompareTag("Destroyer"))
+        {
+            Time.timeScale = 0;
+            Debug.Log("GAME OVER!");
+            GameManager.instance.GameOver();
+        }
+
+    }
 
 	private void SetRandomColor ()
 	{
@@ -70,4 +82,6 @@ public class Player : MonoBehaviour {
 				break;
 		}
 	}
+
+	
 }
